@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "180443304032",
+    "firebase_url": "https://masdamas-49803.firebaseio.com",
+    "project_id": "masdamas-49803",
+    "storage_bucket": "masdamas-49803.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180443304032:android:e7888c28b9438aca907305",
+        "android_client_info": {
+          "package_name": "com.endinternational.masdamas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180443304032-ocqb57l6l6lf8dvk98ntgsj183vfpqkk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.endinternational.masdamas",
+            "certificate_hash": "8e4ead57843547f15e6c5f2b63890189f48652e4"
+          }
+        },
+        {
+          "client_id": "180443304032-7u18haq5e21jf6gj27eg86s0u1u641a0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtRhbvWOx-HSHXhjpSbQ2_zuSJ21LfwaQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180443304032-7u18haq5e21jf6gj27eg86s0u1u641a0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "180443304032-40chglrqjs1lgcnpn8h097vjqta91els.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.endinternational.masdamas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

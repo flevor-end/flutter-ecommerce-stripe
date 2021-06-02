@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>180443304032-40chglrqjs1lgcnpn8h097vjqta91els.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.180443304032-40chglrqjs1lgcnpn8h097vjqta91els</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBDCghZ8YNN0zDcNb4JIEqbpVwzpUM-0Rc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>180443304032</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.endinternational.masdamas</string>
+	<key>PROJECT_ID</key>
+	<string>masdamas-49803</string>
+	<key>STORAGE_BUCKET</key>
+	<string>masdamas-49803.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:180443304032:ios:6c4c41ac8d1d8254907305</string>
+	<key>DATABASE_URL</key>
+	<string>https://masdamas-49803.firebaseio.com</string>
+</dict>
+</plist>
