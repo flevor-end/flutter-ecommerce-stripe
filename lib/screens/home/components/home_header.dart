@@ -141,7 +141,9 @@ class _HomeHeaderState extends State<HomeHeader> {
                  alignment: Alignment.centerLeft,
                 child: IconButton(
                   icon:Icon(Icons.menu,color: Colors.white),
-                  onPressed: (){showDialog(context: context, builder: (buildcontext) => Menulateral());},
+                  onPressed: (){
+                    showDialog(context: context, builder: (buildcontext) => Menulateral());
+                    },
                   color:Colors.red,
                ),
               ),

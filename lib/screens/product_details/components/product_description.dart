@@ -100,7 +100,7 @@ class ProductDescription extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ExpandableText(
-              title: "Desccripción",
+              title: "Descripción",
               content: product.description,
             ),
             const SizedBox(height: 16),

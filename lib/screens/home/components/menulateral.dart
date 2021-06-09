@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
+import 'package:logger/logger.dart';
+import 'package:masdamas/components/custom_text.dart';
 import 'package:masdamas/constants.dart';
 import 'package:masdamas/screens/components/avatar.dart';
 import 'package:masdamas/screens/custom_expansion_tile.dart' as custom;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:masdamas/blocs/bloc_use.dart';
+import 'package:masdamas/screens/edit_product/edit_product_screen.dart';
+import 'package:masdamas/screens/my_orders/my_orders_screen.dart';
+import 'package:masdamas/screens/my_products/my_products_screen.dart';
+import 'package:masdamas/screens/payments/component/pay_card.dart';
 import 'package:masdamas/screens/profile/components/dialog.dart';
+import 'package:masdamas/services/authentification/authentification_service.dart';
+import 'package:masdamas/services/database/user_database_helper.dart';
 import 'package:masdamas/sizec.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../../utils.dart';
 
 class Iniciom extends StatefulWidget {
   @override
@@ -60,7 +71,9 @@ class _MenulateralState extends State<Menulateral> {
   ),
     child:
       ListView(
+        physics: BouncingScrollPhysics(),
        children: <Widget>[
+         
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(5)),
@@ -90,41 +103,37 @@ class _MenulateralState extends State<Menulateral> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(5),
             child: Container(
-            height: 40,
+            height: 72,
             width: 50,
             decoration: BoxDecoration(
                 color: kPrimaryColor,
                 borderRadius: BorderRadius.circular(5),
                 
               ),
-            child: Row(children: [ Align( widthFactor: 0.9,child:Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Avatar(
-
-          ),
-            ),),Padding(
-              padding: const EdgeInsets.all(3),
-              child: Align(
-               widthFactor: 1.1,
-                child: Column(children: [
-                  Text("Buen Dia",style:TextStyle(  color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400)),
-                        nombre == null
-                  ?      Text("  ",style: TextStyle(  color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold),)
-               :      Text(nombre,style: TextStyle(  color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold),),
-             
-                ],),
-              ),
-            )],),
+              child: StreamBuilder<User>(
+              stream: AuthentificationService().userChanges,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final user = snapshot.data;
+                  return buildUserAccountsHeader(user);
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Center(
+                    child: Icon(Icons.error),
+                  );
+                }
+              }),
+            
+              
+           ),
             ),
-          ),
+          
 
           Container(
             color: Colors.white,
@@ -932,7 +941,141 @@ class _MenulateralState extends State<Menulateral> {
                   ),
                 
           
-              children: <Widget>[]),),
+              children: <Widget>[
+                // ListTile(
+                //   onTap: () {
+                //     showDialog(context: context, builder: (buildcontext) => PaymentsScreen());
+                   
+                //   },
+                //   leading: Icon(Icons.book),
+                //   title: CustomText(
+                //     text: "Historial de pagos"
+                //   ),
+                // )
+                ListTile(
+            leading: Icon(Icons.add_shopping_cart_sharp),
+            title: Text(
+              "Mis ordenes",
+              style: TextStyle(fontSize: 16, color: Colors.black),
+            ),
+            onTap: () async {
+              bool allowed = AuthentificationService().currentUserVerified;
+              if (!allowed) {
+                final reverify = await showConfirmationDialog(context,
+                    "You haven't verified your email address. This action is only allowed for verified users.",
+                    positiveResponse: "Resend verification email",
+                    negativeResponse: "Go back");
+                if (reverify) {
+                  final future = AuthentificationService()
+                      .sendVerificationEmailToCurrentUser();
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return FutureProgressDialog(
+                        future,
+                        message: Text("Resending verification email"),
+                      );
+                    },
+                  );
+                }
+                return;
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyOrdersScreen(),
+                ),
+              );
+            },
+          ),
+
+              ]),),
+
+              custom.ExpansionTile(
+      //leading: Icon(Icons.business),
+      title: Text(
+                    'Soy Vendedor',
+                    style: TextStyle(
+                      color: kSecondaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13.6,
+                    ),
+                  ),
+      children: [
+        ListTile(
+          title: Text(
+            "Agregar nuevo producto",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
+          ),
+          onTap: () async {
+            bool allowed = AuthentificationService().currentUserVerified;
+            if (!allowed) {
+              final reverify = await showConfirmationDialog(context,
+                  "You haven't verified your email address. This action is only allowed for verified users.",
+                  positiveResponse: "Resend verification email",
+                  negativeResponse: "Go back");
+              if (reverify) {
+                final future = AuthentificationService()
+                    .sendVerificationEmailToCurrentUser();
+                await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return FutureProgressDialog(
+                      future,
+                      message: Text("Resending verification email"),
+                    );
+                  },
+                );
+              }
+              return;
+            }
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EditProductScreen()));
+          },
+        ),
+        ListTile(
+          title: Text(
+            "Gestionar mis productos",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+            ),
+          ),
+          onTap: () async {
+            bool allowed = AuthentificationService().currentUserVerified;
+            if (!allowed) {
+              final reverify = await showConfirmationDialog(context,
+                  "You haven't verified your email address. This action is only allowed for verified users.",
+                  positiveResponse: "Resend verification email",
+                  negativeResponse: "Go back");
+              if (reverify) {
+                final future = AuthentificationService()
+                    .sendVerificationEmailToCurrentUser();
+                await showDialog(
+                  context: context,
+                  builder: (context) {
+                    return FutureProgressDialog(
+                      future,
+                      message: Text("Resending verification email"),
+                    );
+                  },
+                );
+              }
+              return;
+            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyProductsScreen(),
+              ),
+            );
+          },
+        ),
+      ],
+    ),
                  Container(
 
             child: custom.ExpansionTile(
@@ -982,3 +1125,47 @@ class _MenulateralState extends State<Menulateral> {
     );
   }
 }
+
+  UserAccountsDrawerHeader buildUserAccountsHeader(User user) {
+    return UserAccountsDrawerHeader(
+      margin: EdgeInsets.zero,
+      decoration: BoxDecoration(
+        color: kTextColor.withOpacity(0.15),
+      ),
+      accountEmail: Text(
+        user.email ?? "Sin Email",
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.black,
+        ),
+      ),
+      accountName: Text(
+        user.displayName ?? "Sin Nombre",
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.black,
+        ),
+      ),
+      currentAccountPicture: FutureBuilder(
+        future: UserDatabaseHelper().displayPictureForCurrentUser,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return CircleAvatar(
+              backgroundImage: NetworkImage(snapshot.data),
+            );
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            final error = snapshot.error;
+            Logger().w(error.toString());
+          }
+          return CircleAvatar(
+            backgroundColor: kTextColor,
+          );
+        },
+      ),
+    );
+  }

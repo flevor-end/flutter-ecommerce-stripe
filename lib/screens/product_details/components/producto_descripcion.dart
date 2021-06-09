@@ -1,7 +1,9 @@
 import 'package:getwidget/components/accordian/gf_accordian.dart';
+import 'package:masdamas/components/share_screen.dart';
+import 'package:masdamas/components/shoppers_popular.dart';
 import 'package:masdamas/models/Product.dart';
 import 'package:masdamas/screens/Cart/components/cart_item_card.dart';
-import 'package:masdamas/screens/Cart/components/payment_Screen.dart';
+import 'package:masdamas/screens/payments/payment_Screen.dart';
 import 'package:masdamas/screens/checkout/checkout_screen.dart';
 import 'package:masdamas/screens/details/components/User_bullet.dart';
 import 'package:masdamas/screens/details/components/cart_counter.dart';
@@ -74,16 +76,17 @@ class ProductoDescripcion extends StatelessWidget {
                     const SizedBox(height: 10),
                     Row(
                       children: [
-                        BtnDetail(
-                          icono: "assets/icons/User Icon.svg",
-                          text: 'USUARIOS',
-                          press: () {},
-                          isColor: true,
+                        Container(
+                          width: SizeConfig.screenWidth * 0.3,
+                          alignment: Alignment.center,
+                          child: ShoppersPopular(),
                         ),
                         BtnDetail(
                           icono: "assets/icons/AB4.svg",
                           text: 'COMPARTIR',
-                          press: () {},
+                          press: () {
+                            showDialog(context: context, builder: (buildcontext) => ShareScreen());
+                          },
                           background: kShopColor,
                         ),
                       ],
@@ -241,16 +244,59 @@ class ProductoDescripcion extends StatelessWidget {
                 textAlign: TextAlign.center,
                 ),
                 contentChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: Container(),
+                    Row(
+                      children: [
+                        Container(
+                          width: SizeConfig.screenWidth * 0.58,
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1, color: kSecondaryColor))),
+                          child: Text(
+                            'MASPAY'
+                          ),
+                        ),
+                        Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(width: 1, color: kSecondaryColor))),
+                      child: Text(
+                        "\$ 1.00.000"
+                      ),
                     ),
-                    Container(
-                      child: Container(),
+                      ],
                     ),
-                    Container(
-                      child: Container()
+                    Row(
+                      children: [
+                        Container(
+                          width: SizeConfig.screenWidth * 0.58,
+                          decoration: BoxDecoration(
+                            border: Border(bottom: BorderSide(width: 1, color: kSecondaryColor))),
+                          child: Text(
+                            'MASBIT'
+                          ),
+                        ),
+                        Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(width: 1, color: kSecondaryColor))),
+                      child: Text(
+                        '\$ 800.000'
+                      ),
                     ),
+                      ],
+                    ),
+                    FlatButton(
+                  color: kPrimaryColor,
+                  onPressed: () => {}, 
+                  child: Column(
+                    children: [
+                      Text(
+                        "COMPRA YA",
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                      
+                    ],
+                  )
+                ),
                     
                   ],
                 ),
@@ -428,6 +474,7 @@ class BtnDetail extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        
                         SvgPicture.asset(
                           icono,
                           width: SizeConfig.screenWidth * 0.04,

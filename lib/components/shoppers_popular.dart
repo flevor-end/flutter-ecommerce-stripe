@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:masdamas/routes.dart';
 import 'package:masdamas/sizec.dart';
+
+import '../constants.dart';
 
 class ShoppersPopular extends StatelessWidget {
   const ShoppersPopular({
@@ -11,7 +14,7 @@ class ShoppersPopular extends StatelessWidget {
     int totalUser = 0;
     return SizedBox(
       width: double.infinity,
-      height: getProportionateScreenWidth(78),
+      height: getProportionateScreenWidth(18),
       child: Stack(
         children: [
           // ...List.generate(products[0].users.length, (index) {
@@ -22,20 +25,83 @@ class ShoppersPopular extends StatelessWidget {
           //   );
           // }),
           Positioned(
-            bottom: (18 * totalUser).toDouble(),
+            left: 10,
+              child: buildShopperFace(index),
+            ),
+          Positioned(
+            left: 30,
             child: SizedBox(
               height: getProportionateScreenWidth(18),
               width: getProportionateScreenWidth(18),
               child: FlatButton(
+                
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
+                  side: BorderSide(color: kSecondaryColor),
                     borderRadius: BorderRadius.circular(30)),
                 color: Colors.white,
                 onPressed: () {},
-                child: Icon(
-                  Icons.person_outlined,
-                  color: Colors.red,
-                  size: 18,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_add_rounded,
+                      color: Colors.red,
+                      size: 14,
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 50,
+            child: SizedBox(
+              height: getProportionateScreenWidth(18),
+              width: getProportionateScreenWidth(18),
+              child: FlatButton(
+                
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: kSecondaryColor),
+                    borderRadius: BorderRadius.circular(30)),
+                color: Colors.white,
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_add_rounded,
+                      color: Colors.red,
+                      size: 14,
+                    ),
+                    
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left:70,
+            child: SizedBox(
+              height: getProportionateScreenWidth(18),
+              width: getProportionateScreenWidth(18),
+              child: FlatButton(
+                
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: kSecondaryColor),
+                    borderRadius: BorderRadius.circular(30)),
+                color: Colors.white,
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person_add_rounded,
+                      color: Colors.red,
+                      size: 14,
+                    ),
+                    
+                  ],
                 ),
               ),
             ),

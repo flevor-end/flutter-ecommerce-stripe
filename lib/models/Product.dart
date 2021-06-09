@@ -150,5 +150,3 @@ class Product extends Model {
     return map;
   }
 }
-
-List users = [user1,user2,user3];

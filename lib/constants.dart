@@ -36,6 +36,7 @@ const String kNamelNullError = "Por favor, escriba su nombre";
 const String kPhoneNumberNullError =
     "Por favor, introduzca su número de teléfono";
 const String kAddressNullError = "Ingrese su dirección";
+const String FIELD_REQUIRED_MSG = "Este campo es obligatorio";
 
 final otpInputDecoration = InputDecoration(
   contentPadding:

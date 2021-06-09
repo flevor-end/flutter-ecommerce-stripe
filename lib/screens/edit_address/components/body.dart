@@ -28,28 +28,28 @@ class Body extends StatelessWidget {
                   style: headingStyle,
                 ),
                 SizedBox(height: getProportionateScreenHeight(30)),
-                // addressIdToEdit == null
-                //     ? AddressDetailsForm(
-                //         addressToEdit: null,
-                //       )
-                //     : FutureBuilder<Address>(
-                //         future: UserDatabaseHelper()
-                //             .getAddressFromId(addressIdToEdit),
-                //         builder: (context, snapshot) {
-                //           if (snapshot.hasData) {
-                //             final address = snapshot.data;
-                //             return AddressDetailsForm(addressToEdit: address);
-                //           } else if (snapshot.connectionState ==
-                //               ConnectionState.waiting) {
-                //             return Center(
-                //               child: CircularProgressIndicator(),
-                //             );
-                //           }
-                //           return AddressDetailsForm(
-                //             addressToEdit: null,
-                //           );
-                //         },
-                //       ),
+                addressIdToEdit == null
+                    ? AddressDetailsForm(
+                        addressToEdit: null,
+                      )
+                    : FutureBuilder<Address>(
+                        future: UserDatabaseHelper()
+                            .getAddressFromId(addressIdToEdit),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final address = snapshot.data;
+                            return AddressDetailsForm(addressToEdit: address);
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return AddressDetailsForm(
+                            addressToEdit: null,
+                          );
+                        },
+                      ),
                 SizedBox(height: getProportionateScreenHeight(40)),
               ],
             ),

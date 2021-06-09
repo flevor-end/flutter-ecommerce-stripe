@@ -10,6 +10,8 @@ import 'package:masdamas/screens/shop/home_screen.dart';
 import 'package:masdamas/screens/shopping/shopping_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'home_screen_drawer.dart';
+
 
 
 class Masdamas extends StatefulWidget {
@@ -166,6 +168,7 @@ class _MasdamasState extends State<Masdamas> {
             MacroScreen()
           ]),
           bottomNavigationBar:  CustomBottomNavBar(color: false,color2: false,color3: false,),
+          //drawer: HomeScreenDrawer(),
          
       ),
       

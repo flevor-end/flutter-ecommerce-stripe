@@ -1,3 +1,4 @@
+import 'package:masdamas/components/shoppers_popular.dart';
 import 'package:masdamas/services/database/product_database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -101,9 +102,11 @@ Row buildProductCardItems(Product product) {
                   maxLines: 2,
                 ),
               ),
-              SizedBox(height: getProportionateScreenWidth(10)),
+              SizedBox(height: getProportionateScreenWidth(6)),
               ContentCardProduct(
-                text: 'USUARIOS',
+                hasText: false,
+                hasUsericon: true,
+                text: 'Usuarios',
                 description: 'ENTREGA 15 DIAS', 
                 isColor: true,
                 
@@ -130,17 +133,21 @@ Row buildProductCardItems(Product product) {
 
 class ContentCardProduct extends StatelessWidget {
   final String text, description;
+  final bool hasText;
+  final bool hasUsericon;
   final Color color;
   final Color colorText;
   final bool isColor;
-  
+  final GestureTapCallback press;
 
   const ContentCardProduct({
-    Key key, this.text, this.description, this.color, this.colorText = kShopColor, this.isColor = false,
+    Key key, this.text, this.description, this.color, this.colorText = kShopColor, this.isColor = false, this.hasUsericon, this.hasText, this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool _hasUsericon = hasUsericon ?? false;
+    bool _hasText = hasText ?? true;
     return Container(
       decoration: BoxDecoration(
         border: Border(top: BorderSide(width: 1, color: kSecondaryColor), bottom: BorderSide(width: 1, color: kSecondaryColor))
@@ -152,15 +159,25 @@ class ContentCardProduct extends StatelessWidget {
             color: color,
             child: Padding(
               padding: const EdgeInsets.all(3.6),
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color:  isColor ? Colors.white : colorText,
-                  fontWeight: FontWeight.bold,
-                  fontSize: getProportionateScreenHeight(14)
-                ),
-                
+              child: Column(
+                children: [
+                  if(_hasUsericon)
+                  Container(
+                    alignment: Alignment.center,
+                    child: ShoppersPopular(),
+                  ),
+                  if(_hasText)
+                  Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color:  isColor ? Colors.white : colorText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: getProportionateScreenHeight(14)
+                    ),
+                    
+                  ),
+                ],
               ),
             )
           ),
